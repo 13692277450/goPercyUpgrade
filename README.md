@@ -4,7 +4,7 @@ GoPercyGrade is a sample Go library that only need two lines code to upgrade you
 
 ## Features
 
-- Simple and clean API, only one line code to upgrade your application
+- Simple and clean API, only two lines code to upgrade your application
 - Auto detect platform and choose correct download url
 - Auto move current application to a new name to replace application from new one.
 - Auto remove old files if needed.
