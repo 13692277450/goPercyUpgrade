@@ -1,6 +1,6 @@
-# GoPercyGrade
+# GoPercyUpgrade
 
-GoPercyGrade is a sample Go library that only need two lines code to upgrade your application for 3 platform: Windows, Linux, MacOS.
+GoPercyUpgrade is a sample Go library that only need two lines code to upgrade your application for 3 platform: Windows, Linux, MacOS.
 
 ## Features
 
