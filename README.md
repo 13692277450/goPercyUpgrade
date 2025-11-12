@@ -18,7 +18,7 @@ go get github.com/13692277450/gopercyupgrade@latest
 ## Usage
 
 ```go
-import "github.com/13692277450/gopercyupgraade"
+import "github.com/13692277450/gopercyupgrade"
 
 func main() {
     // Use the library functions here
