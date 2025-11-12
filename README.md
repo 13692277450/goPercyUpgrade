@@ -12,13 +12,13 @@ GoPercyUpgrade is a sample Go library that only need two lines code to upgrade y
 ## Installation
 
 ```bash
-go get github.com/13692277450/gopercyupgrde@latest
+go get github.com/13692277450/gopercyupgrade@latest
 ```
 
 ## Usage
 
 ```go
-import "github.com/13692277450/gopercyupgrade"
+import "github.com/13692277450/gopercyupgraade"
 
 func main() {
     // Use the library functions here
