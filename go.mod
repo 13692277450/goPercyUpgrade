@@ -1,4 +1,4 @@
-module gopercyupgrade
+module github.com/13692277450/gopercyupgrade
 
 go 1.24.7
 
