@@ -1,4 +1,4 @@
-package gopercyupgrade
+package main
 
 import (
 	"encoding/json"
@@ -83,24 +83,32 @@ type Version struct {
 	PatchVersion int
 }
 
+// Helper function to validate version format (x.x.x)
+
 func GoPercyUpgradeConfig(CurrentVersion, NewVersion string) {
+
 	// Get update version info from server.GoPercyUpgrade
 	versionBody, err := http.Get(NewVersion)
 	if err != nil {
-		fmt.Println("Get update version info was failure.")
+		fmt.Printf("ERROR: Get update version info failed: %v\n", err)
 		return
 	}
 	defer versionBody.Body.Close()
 	versionData, err := io.ReadAll(versionBody.Body)
 	if err != nil {
-		fmt.Println("Read update version info was failure.")
+		fmt.Printf("ERROR: Read update version info failed: %v\n", err)
 		return
 	}
 	err = json.Unmarshal(versionData, &updateConfig)
+	if err != nil {
+		fmt.Printf("ERROR: JSON unmarshal failed: %v\n", err)
+		return
+	}
 
 	sysType := runtime.GOOS
 	switch sysType {
 	case "windows":
+
 		versionDiffer := VersionCompareResult(CurrentVersion, updateConfig.VersionWindows)
 		switch versionDiffer {
 		case "lower":
@@ -121,7 +129,8 @@ func GoPercyUpgradeConfig(CurrentVersion, NewVersion string) {
 			upgradeWindows(downloadUrl)
 		}
 	case "linux":
-		versionDiffer := VersionCompareResult(CurrentVersion, updateConfig.VersionWindows)
+
+		versionDiffer := VersionCompareResult(CurrentVersion, updateConfig.VersionLinux)
 		switch versionDiffer {
 		case "lower":
 			return
@@ -140,7 +149,8 @@ func GoPercyUpgradeConfig(CurrentVersion, NewVersion string) {
 			upgradeLinux(downloadUrl)
 		}
 	case "darwin":
-		versionDiffer := VersionCompareResult(CurrentVersion, updateConfig.VersionWindows)
+
+		versionDiffer := VersionCompareResult(CurrentVersion, updateConfig.VersionMac)
 		switch versionDiffer {
 		case "lower":
 			return
@@ -367,8 +377,9 @@ func downloadFile(url, filepath string) error {
 
 func SortVersion(versionStr string) (*Version, error) {
 	partsVersion := strings.Split(versionStr, ".")
+	//fmt.Printf("leng is : %d", len(partsVersion))
 	if len(partsVersion) != 3 {
-		return nil, fmt.Errorf("invalid version format: %s", versionStr)
+		return nil, fmt.Errorf("invalid version format: %s (split len: %d), verion number must be 3 parts: x.x.x", versionStr, len(partsVersion))
 	}
 
 	majorVersion, err := strconv.Atoi(partsVersion[0])
@@ -400,9 +411,17 @@ func CompareVersions(ver1, ver2 *Version) int {
 }
 
 func VersionCompareResult(currentVersion, newVersion string) string {
+	if currentVersion == "" {
+		fmt.Println("ERROR: Empty current version.")
+		return ""
+	}
+	if newVersion == "" {
+		fmt.Println("ERROR: Empty new version.")
+		return ""
+	}
 	verStr1, err := SortVersion(currentVersion)
 	if err != nil {
-		fmt.Println("Error parsing current version:", err)
+		fmt.Printf("ERROR: Parsing current version %q: %v\n", currentVersion, err)
 		return ""
 	}
 	VerStr2, err := SortVersion(newVersion)

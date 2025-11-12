@@ -12,7 +12,7 @@ GoPercyGrade is a sample Go library that only need two lines code to upgrade you
 ## Installation
 
 ```bash
-go get github.com/13692277450/gopercyupgrde
+go get github.com/13692277450/gopercyupgrde@latest
 ```
 
 ## Usage
@@ -45,6 +45,24 @@ func main() {
     //done, so easy.
 }
 ```
+
+## Screenshots
+
+
+Linux version test results:
+
+
+
+MacOS version test results:
+
+ 
+
+Windows version test results:
+
+ 
+
+
+
 
 ## Contributing
 
