@@ -1,4 +1,5 @@
-<img width="554" height="201" alt="image" src="https://github.com/user-attachments/assets/a1dad592-6641-4003-a96e-2a6c14ede96c" />
+
+<img width="1206" height="377" alt="image" src="https://github.com/user-attachments/assets/f0c287b9-7b9d-4706-acce-1a8a7ff4638a" />
 
 
 # GoPercyUpgrade
